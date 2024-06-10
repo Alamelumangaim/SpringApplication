@@ -13,14 +13,12 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class Employee {
+public class Employee extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String fulName;
+    private String fullName;
     private String mobileNum;
     private String panNum;
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID managerId;
 }

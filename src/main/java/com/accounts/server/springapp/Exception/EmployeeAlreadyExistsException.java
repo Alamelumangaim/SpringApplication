@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class EmployeeAlreadyExistsException extends RuntimeException{
-    EmployeeAlreadyExistsException(String messsage){
+   public EmployeeAlreadyExistsException(String messsage){
         super(messsage);
     }
 }

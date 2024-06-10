@@ -2,11 +2,13 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mysql://localhost:32771/employeeDB
+    url: jdbc:mysql://localhost:32771/employee
     username: root
     password: root
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-
+  sql:
+    init:
+      mode: always
