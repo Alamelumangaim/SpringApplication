@@ -52,4 +52,11 @@ public class EmployeeServiceImpl implements IEmployee {
         Employee employee1 = EmployeeMapper.mapToEmployee(employeeDTO,employee);
         employeeRepository.save(employee1);
     }
+
+    @Override
+    public void deleteUser(String mobileNum) {
+        Employee employee = employeeRepository.findByMobileNum(mobileNum)
+                .orElseThrow(()->new ResourceNotFoundException("Employee with the mobile number not exists"));
+        employeeRepository.deleteById(employee.getId());
+    }
 }

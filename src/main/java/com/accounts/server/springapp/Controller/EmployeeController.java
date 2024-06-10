@@ -43,5 +43,10 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO("Updated successfully","200"));
     }
-
+    @PostMapping("/delete_user")
+    public ResponseEntity<ResponseDTO> deleteUser(@RequestParam String mobileNum){
+        employeeService.deleteUser(mobileNum);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO("Deleted successfully","200"));
+    }
 }

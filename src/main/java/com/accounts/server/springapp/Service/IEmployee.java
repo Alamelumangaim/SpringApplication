@@ -10,4 +10,5 @@ public interface IEmployee {
     List<Employee> getUsers();
     Employee getUser(String mobileNum);
     void updateUser(EmployeeDTO employeeDTO);
+    void deleteUser(String mobileNum);
 }
