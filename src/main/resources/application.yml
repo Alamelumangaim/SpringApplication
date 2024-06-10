@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:mysql://localhost:32771/employee
+    url: jdbc:mysql://localhost:32773/employee
     username: root
     password: root
   jpa:

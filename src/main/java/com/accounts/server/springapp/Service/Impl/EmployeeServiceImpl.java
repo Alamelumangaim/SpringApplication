@@ -2,6 +2,7 @@ package com.accounts.server.springapp.Service.Impl;
 
 import com.accounts.server.springapp.DTO.EmployeeDTO;
 import com.accounts.server.springapp.Exception.EmployeeAlreadyExistsException;
+import com.accounts.server.springapp.Exception.ResourceNotFoundException;
 import com.accounts.server.springapp.Mapper.EmployeeMapper;
 import com.accounts.server.springapp.Model.Employee;
 import com.accounts.server.springapp.Repository.EmployeeRepository;
@@ -10,6 +11,8 @@ import lombok.AllArgsConstructor;
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.ReadOnlyFileSystemException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +28,28 @@ public class EmployeeServiceImpl implements IEmployee {
             throw new EmployeeAlreadyExistsException("Employee already exists");
         }
         Employee employee1 = EmployeeMapper.mapToEmployee(employeeDTO,new Employee());
+        employeeRepository.save(employee1);
+    }
+
+    @Override
+    public List<Employee> getUsers() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public Employee getUser(String mobileNum) {
+        Employee employee;
+        employee = employeeRepository.findByMobileNum(mobileNum).orElseThrow(
+                ()->new ResourceNotFoundException("Requested details not found")
+        );
+        return employee;
+    }
+
+    @Override
+    public void updateUser(EmployeeDTO employeeDTO) {
+        Employee employee = employeeRepository.findByMobileNum(employeeDTO.getMobileNum())
+                .orElseThrow(()->new ResourceNotFoundException("Employee with the mobile number not exists"));
+        Employee employee1 = EmployeeMapper.mapToEmployee(employeeDTO,employee);
         employeeRepository.save(employee1);
     }
 }
